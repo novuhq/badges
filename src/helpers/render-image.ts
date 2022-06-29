@@ -20,7 +20,7 @@ const createBundler = async ({ compact }: {compact: any}) => {
   if (toReturn[id]) {
     return toReturn[id];
   }
-  const bundleLocation = await bundle(path.resolve('/src', 'index.ts'));
+  const bundleLocation = await bundle(path.resolve('/src', 'index.js'));
 
   // Extract all the compositions you have defined in your project
   // from the webpack bundle.
