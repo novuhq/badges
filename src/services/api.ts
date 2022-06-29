@@ -4,7 +4,7 @@ import { IUser } from '@/types/user';
 
 const getUser = (userName: string): Promise<IUser> => {
   return new Promise((resolve, reject) => {
-    https.get(`https://contributors.novu.co/contributor/${userName}`, (response) => {
+    https.get(`${process.env.API_PATH}/contributor/${userName}`, (response) => {
       if (response.statusCode !== 200) {
         return reject(new Error("Failed to get Contributor's data"));
       }
@@ -28,7 +28,7 @@ const getUsers = (): Promise<{
   pages: number;
 }> => {
   return new Promise((resolve, reject) => {
-    https.get(`https://contributors.novu.co/contributors/`, (response) => {
+    https.get(`${process.env.API_PATH}/contributors/`, (response) => {
       if (response.statusCode !== 200) {
         return reject(new Error("Failed to get Contributor's data"));
       }

@@ -1,17 +1,8 @@
+import schedule from 'node-schedule';
+
 import 'dotenv/config';
+import imagesController from '@/controllers/images';
 
-import express, { Express } from 'express';
+imagesController();
 
-import imageRouter from '@/routers/image';
-
-const app: Express = express();
-const port = process.env.PORT || 4000;
-
-app.use(express.json());
-app.use('/images', express.static('public/images'));
-
-app.use('/api', imageRouter);
-
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});
+schedule.scheduleJob('0 * * * *', imagesController);
