@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { IPull, IPullFormatted } from '@/types/user';
+import { IPull, IPullFormatted } from '../types/user';
 
 export const getFormattedPulls = (pulls: IPull[]): IPullFormatted => {
   const formattedPulls = pulls

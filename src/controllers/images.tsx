@@ -1,8 +1,8 @@
 import path from 'path';
 
-import { getFormattedPulls } from '@/helpers/get-formatted-pulls';
-import { renderImage } from '@/helpers/render-image';
-import { getUser, getUsers } from '@/services/api';
+import { getFormattedPulls } from '../helpers/get-formatted-pulls';
+import { renderImage } from '../helpers/render-image';
+import { getUser, getUsers } from '../services/api';
 
 const imagesController = async () => {
   const { list } = await getUsers();

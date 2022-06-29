@@ -1,7 +1,7 @@
 import schedule from 'node-schedule';
 
 import 'dotenv/config';
-import imagesController from '@/controllers/images';
+import imagesController from './controllers/images';
 
 imagesController();
 

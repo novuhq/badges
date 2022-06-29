@@ -2,7 +2,7 @@ import { AbsoluteFill, Img, staticFile, continueRender, delayRender } from 'remo
 
 import Achievements from '../../components/achievements';
 import Logo from '../../components/logo/logo';
-import { IPullFormatted } from '@/types/user';
+import { IPullFormatted } from '../../types/user';
 
 const bg = staticFile('/images/background.jpg');
 

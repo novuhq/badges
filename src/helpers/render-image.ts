@@ -4,7 +4,7 @@ import { bundle } from '@remotion/bundler';
 import { getCompositions, renderStill } from '@remotion/renderer';
 
 import { COMPOSITION_ID, COMPACT_COMPOSITION_ID } from '../config/composition';
-import { IPullFormatted } from '@/types/user';
+import { IPullFormatted } from '../types/user';
 
 interface IImageProps {
   userName: string;

@@ -1,6 +1,6 @@
 import https from 'https';
 
-import { IUser } from '@/types/user';
+import { IUser } from '../types/user';
 
 const getUser = (userName: string): Promise<IUser> => {
   return new Promise((resolve, reject) => {

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Img, staticFile } from 'remotion';
 
 import { ACHIEVEMENTS, TAchievementIconKeys } from '../../config/achievements';
-import { IPullFormatted } from '@/types/user';
+import { IPullFormatted } from '../../types/user';
 
 const goldMedal = staticFile('/images/gold-medal.png');
 const silverMedal = staticFile('/images/silver-medal.png');
