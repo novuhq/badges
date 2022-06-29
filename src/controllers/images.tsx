@@ -18,6 +18,7 @@ const imagesController = async () => {
 
       const formattedPulls = getFormattedPulls(pulls);
 
+      console.log(path.resolve(process.env.SAVE_FOLDER!, `/${github}.jpg`));
       const imageOutput = path.resolve(process.env.SAVE_FOLDER!, `/${github}.jpg`);
       const imageOutputCompact = path.resolve(process.env.SAVE_FOLDER!, `/${github}-small.jpg`);
 
