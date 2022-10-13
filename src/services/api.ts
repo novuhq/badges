@@ -1,6 +1,6 @@
 import https from 'https';
 
-import { IUser } from '../types/user';
+import { Achievement, IUser } from '../types/user';
 
 const getUser = (userName: string): Promise<IUser> => {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,31 @@ const getUser = (userName: string): Promise<IUser> => {
           data += chunk;
         })
         .on('end', () => {
-          resolve(JSON.parse(data).result.pageContext.contributor);
+          const parsedData = JSON.parse(data).result;
+          const pullsData = parsedData.pageContext.contributor;
+          const achievementsData =
+            parsedData.data?.wpUserAchievement?.userAchievement?.achievementsList;
+          console.log({ achievementsData });
+
+          const achievements: Array<Achievement> = achievementsData?.map((achievement: any) => {
+            return {
+              achievementDate: achievement.achievementDate,
+              title: achievement.achievement.title,
+              tooltip: achievement.achievement.achievement.tooltip,
+              badge: {
+                altText: achievement.achievement.achievement.badge.altText,
+                src: achievement.achievement.achievement.badge.localFile.childImageSharp
+                  .gatsbyImageData.images.fallback.src,
+                width:
+                  achievement.achievement.achievement.badge.localFile.childImageSharp
+                    .gatsbyImageData.width,
+                height:
+                  achievement.achievement.achievement.badge.localFile.childImageSharp
+                    .gatsbyImageData.height,
+              },
+            };
+          });
+          resolve({ ...pullsData, achievementsList: achievements });
         })
         .on('error', (error) => {
           reject(error);
