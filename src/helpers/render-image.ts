@@ -4,18 +4,19 @@ import { bundle } from '@remotion/bundler';
 import { getCompositions, renderStill } from '@remotion/renderer';
 
 import { COMPOSITION_ID, COMPACT_COMPOSITION_ID } from '../config/composition';
-import { IPullFormatted } from '../types/user';
+import { Achievement, IPullFormatted } from '../types/user';
 
 interface IImageProps {
   userName: string;
   pulls: IPullFormatted;
   totalPulls: number;
   compact?: string;
+  achievementsList: Array<Achievement>;
 }
 
-const toReturn = {[`${COMPACT_COMPOSITION_ID}`]: undefined, [`${COMPOSITION_ID}`]: undefined};
+const toReturn = { [`${COMPACT_COMPOSITION_ID}`]: undefined, [`${COMPOSITION_ID}`]: undefined };
 
-const createBundler = async ({ compact }: {compact: any}) => {
+const createBundler = async ({ compact }: { compact: any }) => {
   const id = compact ? COMPACT_COMPOSITION_ID : COMPOSITION_ID;
   if (toReturn[id]) {
     return toReturn[id];
@@ -37,19 +38,21 @@ const createBundler = async ({ compact }: {compact: any}) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   toReturn[id] = {
-    bundleLocation, comps, composition
-  }
+    bundleLocation,
+    comps,
+    composition,
+  };
 
   return toReturn[id];
-}
+};
 export const renderImage = async (
-  { userName, pulls, totalPulls, compact }: IImageProps,
+  { userName, pulls, totalPulls, compact, achievementsList }: IImageProps,
   imageOutput: string
 ): Promise<void> => {
   try {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const {bundleLocation, comps, composition} = await createBundler({compact});
+    const { bundleLocation, comps, composition } = await createBundler({ compact });
 
     // Ensure the composition exists
     if (!composition) {
@@ -66,6 +69,7 @@ export const renderImage = async (
         userName,
         pulls,
         totalPulls,
+        achievementsList,
       },
     });
   } catch (error) {
