@@ -8,10 +8,11 @@ const imagesController = async () => {
   const { list } = await getUsers();
   const users = list.filter(({ totalPulls, teammate }) => totalPulls > 0 && !teammate);
   console.log('Creating images');
-  for (let { github, totalPulls } of users.splice(1, 1)) {
+  for (const { github, totalPulls } of users) {
     try {
-      github = 'TheLearneer';
-      totalPulls = 3;
+      // try with this to get badges
+      // github = 'TheLearneer';
+      // totalPulls = 3;
       console.log('Create badges for ' + github);
       // we need to get the full information on pulls, which is missing from the /contributors/ endpoint,
       // so we have to make an additional request to extract this data
@@ -32,7 +33,9 @@ const imagesController = async () => {
 
       await renderImage(imageProps, imageOutput);
       await renderImage({ compact: 'true', ...imageProps }, imageOutputCompact);
-    } catch (err) {}
+    } catch (err) {
+      // not empty catch statement anymore to stop the error
+    }
   }
 };
 

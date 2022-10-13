@@ -33,7 +33,7 @@ const CompactImage = ({
   totalPulls,
   achievementsList,
 }: ICompactImageProps): JSX.Element => {
-  console.log('ding dong');
+  console.log('ding dong Please work stupid api');
   console.log({ achievementsList });
   return (
     <AbsoluteFill
@@ -70,13 +70,22 @@ const CompactImage = ({
       <AbsoluteFill
         style={{
           color: 'white',
-          top: 100,
+          // change this to go more down
+          top: 125,
           left: 20,
           margin: '0',
+          display: 'flex',
+          flexDirection: 'row',
         }}
       >
-        {achievementsList.map((achievement) => (
-          <span>{achievement.title.trim()}</span>
+        {achievementsList?.map((achievement) => (
+          <Img
+            src={'https://novu.co/' + achievement.badge.src}
+            alt={achievement.badge.altText}
+            width={30}
+            height={30}
+            style={{ marginRight: 15 }}
+          />
         ))}
       </AbsoluteFill>
     </AbsoluteFill>

@@ -21,6 +21,7 @@ const getUser = (userName: string): Promise<IUser> => {
           console.log({ achievementsData });
 
           const achievements: Array<Achievement> = achievementsData?.map((achievement: any) => {
+            // only god can understand this after today
             return {
               achievementDate: achievement.achievementDate,
               title: achievement.achievement.title,
