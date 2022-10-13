@@ -4,7 +4,7 @@ import { IUser } from '../types/user';
 
 const getUser = (userName: string): Promise<IUser> => {
   return new Promise((resolve, reject) => {
-    https.get(`${process.env.API_PATH}/contributor/${userName}`, (response) => {
+    https.get(`${process.env.API_PATH}/${userName}/page-data.json`, (response) => {
       if (response.statusCode !== 200) {
         return reject(new Error("Failed to get Contributor's data"));
       }
@@ -14,7 +14,7 @@ const getUser = (userName: string): Promise<IUser> => {
           data += chunk;
         })
         .on('end', () => {
-          resolve(JSON.parse(data));
+          resolve(JSON.parse(data).result.pageContext.contributor);
         })
         .on('error', (error) => {
           reject(error);
@@ -28,7 +28,7 @@ const getUsers = (): Promise<{
   pages: number;
 }> => {
   return new Promise((resolve, reject) => {
-    https.get(`${process.env.API_PATH}/contributors/`, (response) => {
+    https.get(`${process.env.API_PATH}/page-data.json`, (response) => {
       if (response.statusCode !== 200) {
         return reject(new Error("Failed to get Contributor's data"));
       }
@@ -38,7 +38,7 @@ const getUsers = (): Promise<{
           data += chunk;
         })
         .on('end', () => {
-          resolve(JSON.parse(data));
+          resolve(JSON.parse(data).result.pageContext.contributors);
         })
         .on('error', (error) => {
           reject(error);

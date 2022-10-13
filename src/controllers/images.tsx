@@ -9,15 +9,14 @@ const imagesController = async () => {
   const users = list.filter(({ totalPulls, teammate }) => totalPulls > 0 && !teammate);
 
   console.log('Creating images');
-  for (const { github, totalPulls } of users) {
+  for (const { github, totalPulls } of users.splice(1, 1)) {
     try {
       console.log('Create badges for ' + github);
       // we need to get the full information on pulls, which is missing from the /contributors/ endpoint,
       // so we have to make an additional request to extract this data
       const { pulls } = await getUser(github);
-
       const formattedPulls = getFormattedPulls(pulls);
-
+      console.log(formattedPulls);
       console.log(path.join(process.env.SAVE_FOLDER!, `/${github}.jpg`));
       const imageOutput = path.join(process.env.SAVE_FOLDER!, `/${github}.jpg`);
       const imageOutputCompact = path.join(process.env.SAVE_FOLDER!, `/${github}-small.jpg`);
