@@ -18,8 +18,6 @@ const getUser = (userName: string): Promise<IUser> => {
           const pullsData = parsedData.pageContext.contributor;
           const achievementsData =
             parsedData.data?.wpUserAchievement?.userAchievement?.achievementsList;
-          console.log({ achievementsData });
-
           const achievements: Array<Achievement> = achievementsData?.map((achievement: any) => {
             // only god can understand this after today
             return {

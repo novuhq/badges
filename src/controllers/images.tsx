@@ -17,9 +17,7 @@ const imagesController = async () => {
       // we need to get the full information on pulls, which is missing from the /contributors/ endpoint,
       // so we have to make an additional request to extract this data
       const { pulls, achievementsList } = await getUser(github);
-      // console.log({ achievementsList });
       const formattedPulls = getFormattedPulls(pulls);
-      console.log(formattedPulls);
       console.log(path.join(process.env.SAVE_FOLDER!, `/${github}.jpg`));
       const imageOutput = path.join(process.env.SAVE_FOLDER!, `/${github}.jpg`);
       const imageOutputCompact = path.join(process.env.SAVE_FOLDER!, `/${github}-small.jpg`);
