@@ -33,8 +33,6 @@ const CompactImage = ({
   totalPulls,
   achievementsList,
 }: ICompactImageProps): JSX.Element => {
-  console.log('ding dong Please work stupid api');
-  console.log({ achievementsList });
   return (
     <AbsoluteFill
       style={{
