@@ -3,7 +3,18 @@ export interface IPull {
   url: string;
   merged_at: Date;
 }
+export interface Achievement {
+  achievementDate: Date;
 
+  title: string;
+  tooltip: string;
+  badge: {
+    altText: string;
+    src: string;
+    width: number;
+    height: number;
+  };
+}
 export interface IUser {
   _id: string;
   github: string;
@@ -11,6 +22,7 @@ export interface IUser {
   totalPulls: number;
   name: string;
   teammate: boolean;
+  achievementsList: Array<Achievement>;
 }
 
 export interface IPullFormatted {

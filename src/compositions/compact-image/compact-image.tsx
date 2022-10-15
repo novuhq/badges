@@ -2,7 +2,7 @@ import { AbsoluteFill, Img, staticFile, continueRender, delayRender } from 'remo
 
 import CompactAchievements from '../../components/compact-achievements';
 import Logo from '../../components/logo/logo';
-import { IPullFormatted } from '../../types/user';
+import { Achievement, IPullFormatted } from '../../types/user';
 
 const bg = staticFile('/images/background.jpg');
 
@@ -24,41 +24,70 @@ interface ICompactImageProps {
   userName: string;
   pulls: IPullFormatted;
   totalPulls: number;
+  achievementsList: Array<Achievement>;
 }
 
-const CompactImage = ({ userName, pulls, totalPulls }: ICompactImageProps): JSX.Element => (
-  <AbsoluteFill
-    style={{
-      fontFamily: 'Brother-1816',
-      backgroundColor: 'black',
-    }}
-  >
-    <AbsoluteFill>
-      <Img src={bg} height={170} width={450} />
-    </AbsoluteFill>
-
+const CompactImage = ({
+  userName,
+  pulls,
+  totalPulls,
+  achievementsList,
+}: ICompactImageProps): JSX.Element => {
+  return (
     <AbsoluteFill
       style={{
-        top: 16,
-        left: 20,
+        fontFamily: 'Brother-1816',
+        backgroundColor: 'black',
       }}
     >
-      <Logo
+      <AbsoluteFill>
+        <Img src={bg} height={170} width={450} />
+      </AbsoluteFill>
+
+      <AbsoluteFill
         style={{
-          width: '64px',
+          top: 16,
+          left: 20,
         }}
-      />
-    </AbsoluteFill>
+      >
+        <Logo
+          style={{
+            width: '64px',
+          }}
+        />
+      </AbsoluteFill>
 
-    <AbsoluteFill
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-      }}
-    >
-      <CompactAchievements userName={userName} pulls={pulls} totalPulls={totalPulls} />
+      <AbsoluteFill
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
+        <CompactAchievements userName={userName} pulls={pulls} totalPulls={totalPulls} />
+      </AbsoluteFill>
+      <AbsoluteFill
+        style={{
+          color: 'white',
+          // change this to go more down
+          top: 125,
+          left: 20,
+          margin: '0',
+          display: 'flex',
+          flexDirection: 'row',
+        }}
+      >
+        {achievementsList?.map((achievement) => (
+          <Img
+            src={'https://novu.co/' + achievement.badge.src}
+            alt={achievement.badge.altText}
+            width={30}
+            height={30}
+            style={{ marginRight: 15 }}
+          />
+        ))}
+      </AbsoluteFill>
     </AbsoluteFill>
-  </AbsoluteFill>
-);
+  );
+};
 
 export default CompactImage;
