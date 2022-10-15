@@ -39,6 +39,7 @@ export const RemotionImage = (): JSX.Element => (
             7: 'June 1, 2022',
           },
         },
+        achievementsList: [],
         totalPulls: 7,
       }}
     />
